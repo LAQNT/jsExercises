@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Math</title>
+
+    <style>
+      form {
+        width: 25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      body > div {
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="handleSubmit(event)">
+      <div>
+        <label for="first-number">What is the first number?</label>
+        <input id="first-number" type="number" />
+      </div>
+
+      <div>
+        <label for="second-number">What is the second number?</label>
+        <input id="second-number" type="number" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        clear();
+
+        const firstNumber = Number(
+          document.getElementById("first-number").value
+        );
+        const secondNumber = Number(
+          document.getElementById("second-number").value
+        );
+        const outputDiv = document.getElementById("output");
+        const outputPr = document.createElement("p");
+
+        outputPr.innerHTML = `${firstNumber} + ${secondNumber} = ${
+          firstNumber + secondNumber
+        } <br>
+        ${firstNumber} - ${secondNumber} = ${firstNumber - secondNumber} <br> 
+        ${firstNumber} * ${secondNumber} = ${firstNumber * secondNumber} <br>
+        ${firstNumber} / ${secondNumber} = ${(
+          firstNumber / secondNumber
+        ).toFixed(2)} <br>`;
+
+        outputDiv.appendChild(outputPr);
+      };
+
+      const clear = () => {
+        document.getElementById("output").innerHTML = "";
+      };
+    </script>
+  </body>
+</html>

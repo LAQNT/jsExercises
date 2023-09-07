@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotes</title>
+
+    <style>
+      form {
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form onsubmit="handleSubmit(event)">
+      <div>
+        <label for="quote">What is the quote?</label>
+        <input id="quote" type="text" />
+      </div>
+
+      <div>
+        <label for="author">Who said it?</label>
+        <input id="author" type="text" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="answer"></div>
+
+    <script>
+      const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const quote = document.getElementById("quote").value;
+        const author = document.getElementById("author").value;
+        const answerDiv = document.getElementById("answer");
+
+        const quoteSpan = document.createElement("span");
+        quoteSpan.textContent = author + " says, " + '"' + quote + '."';
+
+        answerDiv.appendChild(quoteSpan);
+        console.log(quoteSpan);
+      };
+    </script>
+  </body>
+</html>

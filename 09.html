@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paint Calculator</title>
+
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .forms {
+        display: flex;
+        gap: 8rem;
+      }
+
+      form {
+        width: 17rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .output {
+        width: 17rem;
+      }
+
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="forms">
+      <div>
+        <form onsubmit="handleSubmitRec(event)">
+          <h3>Rectangular area</h3>
+          <div>
+            <label for="rec-width">Width:</label>
+            <input type="number" id="rec-width" />
+          </div>
+
+          <div>
+            <label for="rec-length">Length:</label>
+            <input type="number" id="rec-length" />
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+        <div class="output" id="output-rec"></div>
+      </div>
+
+      <div>
+        <form onsubmit="handleSubmitL(event)">
+          <h3>L shape area</h3>
+          <div>
+            <label for="l-a-width">Width A:</label>
+            <input type="number" id="l-a-width" />
+          </div>
+
+          <div>
+            <label for="l-a-length">Length A:</label>
+            <input type="number" id="l-a-length" />
+          </div>
+
+          <div>
+            <label for="l-b-width">Width B:</label>
+            <input type="number" id="l-b-width" />
+          </div>
+
+          <div>
+            <label for="l-b-length">Length B:</label>
+            <input type="number" id="l-b-length" />
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+
+        <div class="output" id="output-l"></div>
+      </div>
+
+      <div>
+        <form onsubmit="handleSubmitCirc(event)">
+          <h3>Circular area</h3>
+
+          <div>
+            <label for="diameter">Diameter:</label>
+            <input type="number" id="diameter" />
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+        <div class="output" id="output-circ"></div>
+      </div>
+    </div>
+
+    <script>
+      const handleSubmitRec = (e) => {
+        e.preventDefault();
+        clear();
+        const width = document.getElementById("circ-width").value;
+        const length = document.getElementById("circ-length").value;
+        const outputDiv = document.getElementById("output-rec");
+
+        const areaToCover = width * length;
+        const litreMq = 33;
+
+        const totalLitre = Math.ceil(areaToCover / litreMq);
+
+        outputDiv.innerHTML = `<p>You will need to purchase ${totalLitre} litres of paint to cover ${areaToCover} square meters.`;
+      };
+
+      const handleSubmitL = (e) => {
+        e.preventDefault();
+        clear();
+
+        const widthA = document.getElementById("l-a-width").value;
+        const lengthA = document.getElementById("l-a-length").value;
+        const widthB = document.getElementById("l-b-width").value;
+        const lengthB = document.getElementById("l-b-length").value;
+        const outputDiv = document.getElementById("output-l");
+
+        const areaToCover = widthA * lengthA + widthB * lengthB;
+        const litreMq = 33;
+
+        const totalLitre = Math.ceil(areaToCover / litreMq);
+
+        outputDiv.innerHTML = `<p>You will need to purchase ${totalLitre} litres of paint to cover ${areaToCover} square meters.`;
+      };
+
+      const handleSubmitCirc = (e) => {
+        e.preventDefault();
+        clear();
+
+        const diameter = document.getElementById("diameter").value;
+
+        const outputDiv = document.getElementById("output-circ");
+
+        const areaToCover = (diameter ** 2 * 3.1416) / 4;
+        const litreMq = 33;
+
+        const totalLitre = Math.ceil(areaToCover / litreMq);
+
+        outputDiv.innerHTML = `<p>You will need to purchase ${totalLitre} litres of paint to cover ${areaToCover} square meters.`;
+      };
+
+      const clear = () => {
+        document.getElementById("output-rec").innerHTML = "";
+        document.getElementById("output-l").innerHTML = "";
+        document.getElementById("output-circ").innerHTML = "";
+      };
+    </script>
+  </body>
+</html>

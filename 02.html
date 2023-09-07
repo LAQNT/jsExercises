@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="getString" onsubmit="handleSubmit(event)">
+      <label for="string">What is the input string?</label>
+      <input id="string" type="text" />
+
+      <button type="submit">submit</button>
+    </form>
+    <div id="string-counter"></div>
+
+    <script>
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        clean();
+
+        let str = document.getElementById("string").value;
+        let strDiv = document.getElementById("string-counter");
+
+        let strSpan = document.createElement("span");
+
+        if (str.length > 0) {
+          let strResult = document.createTextNode(
+            `"${str}"` + " has " + str.length + " characters"
+          );
+
+          strSpan.appendChild(strResult);
+          strDiv.appendChild(strSpan);
+        } else {
+          strDiv.innerText = "Please enter a string";
+        }
+      };
+
+      const clean = () => {
+        document.getElementById("string-counter").textContent = " ";
+      };
+    </script>
+  </body>
+</html>

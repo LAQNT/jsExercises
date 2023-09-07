@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mad-Lib</title>
+
+    <style>
+      form {
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      body > div {
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="handleSubmit(event)">
+      <div>
+        <label for="noun">Enter a noun:</label>
+        <input id="noun" type="text" />
+      </div>
+
+      <div>
+        <label for="verb">Enter a verb:</label>
+        <input id="verb" type="text" />
+      </div>
+
+      <div>
+        <label for="adjective">Enter an adjective:</label>
+        <input id="adjective" type="text" />
+      </div>
+
+      <div>
+        <label for="adverb">Enter an adverb:</label>
+        <input id="adverb" type="text" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+      const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const noun = document.getElementById("noun").value;
+        const verb = document.getElementById("verb").value;
+        const adjective = document.getElementById("adjective").value;
+        const adverb = document.getElementById("adverb").value;
+
+        const outputDiv = document.getElementById("output");
+
+        const outputSpan = document.createElement("span");
+        outputSpan.textContent = `Do you ${verb} your ${adjective} ${noun} ${adverb}? That's hilarious!`;
+
+        outputDiv.appendChild(outputSpan);
+      };
+    </script>
+  </body>
+</html>

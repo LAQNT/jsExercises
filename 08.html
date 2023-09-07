@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizzas</title>
+
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form {
+        width: 25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      form div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      body > div {
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+
+      button {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Pizza Division</h2>
+    <form onsubmit="handleSubmit(event)">
+      <div>
+        <label for="number-people">How many people?</label>
+        <input type="number" id="number-people" />
+      </div>
+
+      <div>
+        <label for="number-pizzas">How many pizzas do you have?</label>
+        <input type="number" id="number-pizzas" />
+      </div>
+
+      <div>
+        <label for="number-slices"
+          >How many slices per pizza do you have?</label
+        >
+        <select type="number" id="number-slices">
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option value="16">16</option>
+          <option value="18">18</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="24">24</option>
+          <option value="26">26</option>
+          <option value="28">28</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        clear();
+
+        const people = Number(document.getElementById("number-people").value);
+        const pizzas = Number(document.getElementById("number-pizzas").value);
+        const slices = Number(document.getElementById("number-slices").value);
+        const outputDiv = document.getElementById("output");
+        const outputP = document.createElement("p");
+
+        const totalSlices = pizzas * slices;
+        const slicesPerPerson = Math.floor(totalSlices / people);
+        const slicesTaken = people * slicesPerPerson;
+        const leftOvers = totalSlices - slicesTaken;
+
+        if (people === 1 && pizzas === 1) {
+          outputP.innerHTML = `${people} person with ${pizzas} pizza <br>
+          Each person gets ${slicesPerPerson} piece of pizza.<br>
+          There are ${leftOvers} leftover pieces.`;
+        } else if (people === 1) {
+          outputP.innerHTML = `${people} person with ${pizzas} pizzas <br>
+          Each person gets ${slicesPerPerson} pieces of pizza.<br>
+          There are ${leftOvers} leftover pieces.`;
+        } else if (pizzas === 1) {
+          outputP.innerHTML = `${people} people with ${pizzas} pizza <br>
+          Each person gets ${slicesPerPerson} pieces of pizza.<br>
+          There are ${leftOvers} leftover pieces.`;
+        } else if (leftOvers === 1) {
+          outputP.innerHTML = `${people} people with ${pizzas} pizzas <br>
+          Each person gets ${slicesPerPerson} pieces of pizza.<br>
+          There are ${leftOvers} leftover piece.`;
+        } else if (slicesPerPerson === 1) {
+          outputP.innerHTML = `${people} people with ${pizzas} pizza <br>
+          Each person gets ${slicesPerPerson} piece of pizza.<br>
+          There are ${leftOvers} leftover pieces.`;
+        } else if (people === 1 && leftOvers === 1 && pizzas === 1) {
+          outputP.innerHTML = `${people} person with ${pizzas} pizza <br>
+          Each person gets ${slicesPerPerson} piece of pizza.<br>
+          There are ${leftOvers} leftover piece.`;
+        } else {
+          outputP.innerHTML = `${people} people with ${pizzas} pizzas <br>
+          Each person gets ${slicesPerPerson} pieces of pizza.<br>
+          There are ${leftOvers} leftover pieces.`;
+        }
+
+        outputDiv.appendChild(outputP);
+      };
+
+      const clear = () => {
+        document.getElementById("output").innerHTML = "";
+      };
+    </script>
+  </body>
+</html>

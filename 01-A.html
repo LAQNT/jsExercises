@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tip Calculator</title>
+
+    <style>
+
+      body {
+        display: flex;
+        gap: 1rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      #result {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        border: solid black 1px;
+        border-radius: 0.3rem;
+        padding: 0.5rem;
+        background-color: rgb(221, 221, 255);
+      }
+
+      #result span:last-of-type {
+        font-weight: 600;
+      }
+
+      #result div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .tip-rate {
+        display: flex;
+        flex-direction: column;
+      }
+
+      datalist {
+        display: flex;
+        justify-content: space-between;
+        writing-mode: horizontal-tb;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <form id="tipForm" action="">
+      <label for="Bill amount">Bill amount:</label>
+      <input id="bill" type="number" step=".01" min="0" />
+
+      <div class="tip-rate">
+        <label for="Tip rate">Tip rate:</label>
+        <input
+          type="range"
+          id="tip"
+          name="Tip rate"
+          min="5"
+          max="20"
+          step="5"
+          list="markers"
+        >
+        <datalist id="markers">
+          <option value="5" label="5"></option>
+          <option value="10" label="10"></option>
+          <option value="15" label="15"></option>
+          <option value="20" label="20"></option>
+        </datalist>
+      </input>
+      </div>
+
+      <button type="submit" value="submit">calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+      document
+        .getElementById("tipForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let bill = Number(document.getElementById("bill").value);
+          let tipRate = Number(document.getElementById("tip").value);
+          let tipAmount = Number(((tipRate / 100) * bill)${firstNumber} - ${secondNumber} = ${firstNumber - secondNumber} <br>);
+          let total = Number(tipAmount + bill);
+
+          // console.log(typeof bill);
+          // console.log(typeof tipRate);
+          // console.log(typeof tipAmount);
+
+          // console.log("Bill:", bill);
+          // console.log("Tip:", tipRate + "%" + " = " + tipAmount);
+          // console.log("Total: " + total);
+
+          let resultDiv = document.getElementById("result");
+          let displayDiv = document.createElement("div");
+          resultDiv.appendChild(displayDiv);
+
+          let dateSpan = document.createElement("span");
+          const date = document.createTextNode(new Date().toLocaleString());
+          dateSpan.appendChild(date);
+
+          let billSpan = document.createElement("span");
+          let billText = document.createTextNode("Bill without tip: " + bill);
+          billSpan.appendChild(billText);
+
+          let tipSpan = document.createElement("span");
+          let tipText = document.createTextNode(
+            "Tip: " + tipRate + "%" + " = " + tipAmount
+          );
+          tipSpan.appendChild(tipText);
+
+          let totalSpan = document.createElement("span");
+          let totalText = document.createTextNode("Total: " + total);
+          totalSpan.appendChild(totalText);
+
+          displayDiv.appendChild(dateSpan);
+          displayDiv.appendChild(billSpan);
+          displayDiv.appendChild(tipSpan);
+          displayDiv.appendChild(totalSpan);
+        });
+    </script>
+  </body>
+</html>
